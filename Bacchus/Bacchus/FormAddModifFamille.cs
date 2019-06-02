@@ -33,7 +33,7 @@ namespace formforproject
         /// <param name="e"></param>
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            if (this.Famille != null)
+           /* if (this.Famille != null)
             {
                 Famille NewFamille = MeinController.GetFamilleByName(this.Famille.Nom);
                 if(NewFamille==null)
@@ -59,7 +59,7 @@ namespace formforproject
                     MessageBox.Show("Cette famille existe déjà");
                 }
 
-            }
+            }*/
 
         }
     }
