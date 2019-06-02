@@ -1,5 +1,6 @@
 ﻿using Bacchus;
 using Bacchus.Controller;
+using Bacchus.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,17 @@ namespace formforproject
     public partial class FormAddModifMarque : Form
     {
         private int RefMarque;
+        private String NameMarque;
         public FormAddModifMarque(int RefMarque)
         {
             InitializeComponent();
             this.RefMarque = RefMarque;
             if (RefMarque>0)
             {
+                Marque Marque = MeinController.GetMarqueByRef(RefMarque);
                 this.Text = "Modification Marque";
+                this.textBoxName.Text = Marque.Nom;
+                NameMarque = Marque.Nom;
             }
         }
         /// <summary>
@@ -51,7 +56,12 @@ namespace formforproject
                 }
                 else
                 {
-                    MessageBox.Show("Cette Marque existe déjà");
+                    if (this.textBoxName.Text.Equals(NameMarque))
+                    {
+                        MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
+                    }
+                    else
+                        MessageBox.Show("Cette Marque existe déjà");
                 }
 
             }

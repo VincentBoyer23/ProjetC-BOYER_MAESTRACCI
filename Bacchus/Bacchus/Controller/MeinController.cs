@@ -45,10 +45,10 @@ namespace Bacchus.Controller
         {
             Famille Famille = DBManager.GetFamilleByName(NomFamille);
             SousFamille SousFamille = new SousFamille();
-
+            SousFamille.RefSousFamille = RefSousFamille;
             SousFamille.Nom = NomSousFamille;
             SousFamille.Famille = Famille;
-            DBManager.InsertSousFamille(SousFamille);
+            DBManager.UpdateSousFamille(SousFamille);
 
         }
         public static void DeleteSousFamille(int RefSousFamille)
@@ -68,7 +68,7 @@ namespace Bacchus.Controller
             Marque Marque = new Marque();
             Marque.RefMarque = RefMarque;
             Marque.Nom = NomMarque;
-            DBManager.InsertMarque(Marque);
+            DBManager.UpdateMarque(Marque);
 
         }
 
@@ -173,18 +173,35 @@ namespace Bacchus.Controller
         {
             return DBManager.GetAllFamilles();
         }
+        public static Famille GetFamilleByRef(int RefFamille)
+        {
+            return DBManager.GetFamilleByRef(RefFamille);
+        }
         public static List<SousFamille> GetAllSousFamilles()
         {
             return DBManager.GetAllSousFamilles();
+        }
+        public static SousFamille GetSousFamilleByRef(int RefSousFamille)
+        {
+            return DBManager.GetSousFamilleByRef(RefSousFamille);
         }
         public static List<Marque> GetAllMarques()
         {
             return DBManager.GetAllMarques();
         }
+        public static Marque GetMarqueByRef(int RefMarque)
+        {
+            return DBManager.GetMarqueByRef(RefMarque);
+        }
 
         public static List<Article> GetAllArticles()
         {
             return DBManager.GetAllArticles();
+        }
+
+        public static Article GetArticleByRef(String RefArticle)
+        {
+            return DBManager.GetArticleByRef(RefArticle);
         }
 
         public static Boolean IsFamilleNameTaken(String Name)

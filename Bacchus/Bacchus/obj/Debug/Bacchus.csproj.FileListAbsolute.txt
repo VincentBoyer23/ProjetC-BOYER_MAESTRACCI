@@ -136,7 +136,6 @@ C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\De
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\formforproject.FormAddModifFamille.resources
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\formforproject.FormAddModifMarque.resources
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\formforproject.FormAddModifSousFamille.resources
-C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\formforproject.FormAddMofiArticle.resources
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.FormExportCSV.resources
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.FormImportCSV.resources
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.FormMain.resources
@@ -147,3 +146,4 @@ C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\De
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.csproj.CopyComplete
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.exe
 C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\Bacchus.pdb
+C:\Users\vinceduroc\source\repos\ProjetC#BOYER_MAESTRACCI\Bacchus\Bacchus\obj\Debug\formforproject.FormAddModifArticle.resources

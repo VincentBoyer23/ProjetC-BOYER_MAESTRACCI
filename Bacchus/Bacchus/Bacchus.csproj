@@ -86,11 +86,11 @@
     <Compile Include="FormAddModifSousFamille.Designer.cs">
       <DependentUpon>FormAddModifSousFamille.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormAddMofiArticle.cs">
+    <Compile Include="FormAddModifArticle.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAddMofiArticle.Designer.cs">
-      <DependentUpon>FormAddMofiArticle.cs</DependentUpon>
+    <Compile Include="FormAddModifArticle.Designer.cs">
+      <DependentUpon>FormAddModifArticle.cs</DependentUpon>
     </Compile>
     <Compile Include="FormExportCSV.cs">
       <SubType>Form</SubType>
@@ -130,8 +130,8 @@
     <EmbeddedResource Include="FormAddModifSousFamille.resx">
       <DependentUpon>FormAddModifSousFamille.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormAddMofiArticle.resx">
-      <DependentUpon>FormAddMofiArticle.cs</DependentUpon>
+    <EmbeddedResource Include="FormAddModifArticle.resx">
+      <DependentUpon>FormAddModifArticle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormExportCSV.resx">
       <DependentUpon>FormExportCSV.cs</DependentUpon>

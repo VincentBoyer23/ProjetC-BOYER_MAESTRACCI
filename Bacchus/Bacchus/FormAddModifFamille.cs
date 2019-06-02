@@ -1,5 +1,6 @@
 ﻿
 using Bacchus.Controller;
+using Bacchus.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,13 +16,17 @@ namespace formforproject
     public partial class FormAddModifFamille : Form
     {
         private int RefFamille;
+        private String NameFamille;
         public FormAddModifFamille(int RefFamille)
         {
             InitializeComponent();
             this.RefFamille = RefFamille;
             if(RefFamille>0)
             {
+                Famille Famille = MeinController.GetFamilleByRef(RefFamille);
                 this.Text = "Modification Famille";
+                this.textBoxName.Text = Famille.Nom;
+                NameFamille = Famille.Nom;
             }
 
         }
@@ -52,7 +57,12 @@ namespace formforproject
                 }
                 else
                 {
-                    MessageBox.Show("Cette famille existe déjà");
+                    if (this.textBoxName.Text.Equals(NameFamille))
+                    {
+                        MeinController.UpdateFamille(this.RefFamille, this.textBoxName.Text);
+                    }
+                    else
+                        MessageBox.Show("Cette famille existe déjà");
                 }
 
             }

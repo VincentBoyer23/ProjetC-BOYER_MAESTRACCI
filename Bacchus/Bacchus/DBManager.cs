@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -267,6 +268,30 @@ namespace Bacchus
                 return famille;
             }
         }
+
+        /// <summary>
+        /// Récupère une Marque par sa référence
+        /// </summary>
+        /// <param name="refFamille"></param>
+        /// <returns></returns>
+        public static Marque GetMarqueByRef(int refMarque)
+        {
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "SELECT * FROM Marques WHERE RefMarque = @Ref";
+            cmd.Parameters.AddWithValue("@Ref", refMarque);
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                Marque Marque = null;
+                while (reader.Read())
+                {
+                    Marque = new Marque();
+                    Marque.RefMarque = reader.GetInt32(0);
+                    Marque.Nom = reader.GetString(1);
+
+                }
+                return Marque;
+            }
+        }
         /// <summary>
         /// Récupère une SousFamille par sa référence
         /// </summary>
@@ -419,17 +444,18 @@ namespace Bacchus
         public static List<SousFamille> GetAllSousFamilles()
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "SELECT * FROM SousFamilles SF JOIN Famille F ON SF.RefFamille=F.RefFamille";
+            cmd.CommandText = "SELECT * FROM SousFamilles SF JOIN Familles F ON SF.RefFamille=F.RefFamille";
             using (SQLiteDataReader reader = cmd.ExecuteReader())
             {
                 List<SousFamille> SousFamilles = new List<SousFamille>();
                 Famille Famille = null;
                 while (reader.Read())
                 {
+                    Famille = new Famille();
                     SousFamille SousFamille = new SousFamille();
                     SousFamille.RefSousFamille = reader.GetInt32(0);
-                    SousFamille.Nom= reader.GetString(2);
                     Famille.RefFamille = reader.GetInt32(1);
+                    SousFamille.Nom= reader.GetString(2);
                     Famille.Nom = reader.GetString(4);
                     SousFamille.Famille = Famille;
                     SousFamilles.Add(SousFamille);
@@ -509,7 +535,9 @@ namespace Bacchus
                     article.Description = reader.GetString(1);
                     sousFamille.RefSousFamille = reader.GetInt32(2);
                     marque.RefMarque = reader.GetInt32(3);
-                    article.PrixHT = reader.GetFloat(4);
+                    String prix = reader.GetFloat(4).ToString();
+                    prix.Replace(",", ".");
+                    article.PrixHT = reader.GetFloat(4)/*float.Parse(prix, CultureInfo.InvariantCulture.NumberFormat)*/;
                     marque.Nom = reader.GetString(6);
                     famille.RefFamille = reader.GetInt32(8);
                     sousFamille.Nom = reader.GetString(9);
