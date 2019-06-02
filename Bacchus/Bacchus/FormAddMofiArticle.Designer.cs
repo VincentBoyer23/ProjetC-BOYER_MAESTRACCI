@@ -30,32 +30,32 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxPrixHT = new System.Windows.Forms.TextBox();
+            this.textBoxQuantite = new System.Windows.Forms.TextBox();
             this.labelQuantity = new System.Windows.Forms.Label();
             this.labelPrice = new System.Windows.Forms.Label();
             this.comboBoxSousFamille = new System.Windows.Forms.ComboBox();
             this.comboBoxMarque = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelSousFamille = new System.Windows.Forms.Label();
             this.labelMarque = new System.Windows.Forms.Label();
             this.labelDescription = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxDesc = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.textBoxPrixHT);
+            this.panel1.Controls.Add(this.textBoxQuantite);
             this.panel1.Controls.Add(this.labelQuantity);
             this.panel1.Controls.Add(this.labelPrice);
             this.panel1.Controls.Add(this.comboBoxSousFamille);
             this.panel1.Controls.Add(this.comboBoxMarque);
-            this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.labelSousFamille);
             this.panel1.Controls.Add(this.labelMarque);
             this.panel1.Controls.Add(this.labelDescription);
-            this.panel1.Controls.Add(this.richTextBox1);
+            this.panel1.Controls.Add(this.richTextBoxDesc);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(595, 295);
@@ -69,20 +69,21 @@
             this.button1.TabIndex = 10;
             this.button1.Text = "Confirmer";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
-            // textBox2
+            // textBoxPrixHT
             // 
-            this.textBox2.Location = new System.Drawing.Point(454, 155);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(138, 22);
-            this.textBox2.TabIndex = 9;
+            this.textBoxPrixHT.Location = new System.Drawing.Point(454, 155);
+            this.textBoxPrixHT.Name = "textBoxPrixHT";
+            this.textBoxPrixHT.Size = new System.Drawing.Size(138, 22);
+            this.textBoxPrixHT.TabIndex = 9;
             // 
-            // textBox1
+            // textBoxQuantite
             // 
-            this.textBox1.Location = new System.Drawing.Point(454, 222);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 22);
-            this.textBox1.TabIndex = 8;
+            this.textBoxQuantite.Location = new System.Drawing.Point(454, 222);
+            this.textBoxQuantite.Name = "textBoxQuantite";
+            this.textBoxQuantite.Size = new System.Drawing.Size(138, 22);
+            this.textBoxQuantite.TabIndex = 8;
             // 
             // labelQuantity
             // 
@@ -118,14 +119,14 @@
             this.comboBoxMarque.Size = new System.Drawing.Size(121, 24);
             this.comboBoxMarque.TabIndex = 4;
             // 
-            // label3
+            // labelSousFamille
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 220);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(122, 17);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "labelSousFamille :";
+            this.labelSousFamille.AutoSize = true;
+            this.labelSousFamille.Location = new System.Drawing.Point(3, 220);
+            this.labelSousFamille.Name = "labelSousFamille";
+            this.labelSousFamille.Size = new System.Drawing.Size(92, 17);
+            this.labelSousFamille.TabIndex = 3;
+            this.labelSousFamille.Text = "SousFamille :";
             // 
             // labelMarque
             // 
@@ -145,13 +146,13 @@
             this.labelDescription.TabIndex = 1;
             this.labelDescription.Text = "Description :";
             // 
-            // richTextBox1
+            // richTextBoxDesc
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(3, 26);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(589, 96);
-            this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = "";
+            this.richTextBoxDesc.Location = new System.Drawing.Point(3, 26);
+            this.richTextBoxDesc.Name = "richTextBoxDesc";
+            this.richTextBoxDesc.Size = new System.Drawing.Size(589, 96);
+            this.richTextBoxDesc.TabIndex = 0;
+            this.richTextBoxDesc.Text = "";
             // 
             // FormAddMofiArticle
             // 
@@ -174,12 +175,12 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBoxSousFamille;
         private System.Windows.Forms.ComboBox comboBoxMarque;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelSousFamille;
         private System.Windows.Forms.Label labelMarque;
         private System.Windows.Forms.Label labelDescription;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox richTextBoxDesc;
+        private System.Windows.Forms.TextBox textBoxPrixHT;
+        private System.Windows.Forms.TextBox textBoxQuantite;
         private System.Windows.Forms.Label labelQuantity;
         private System.Windows.Forms.Label labelPrice;
         private System.Windows.Forms.Button button1;

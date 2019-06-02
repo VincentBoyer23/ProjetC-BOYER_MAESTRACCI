@@ -1,5 +1,5 @@
 ﻿using Bacchus;
-using Bacchus.Model;
+using Bacchus.Controller;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +14,12 @@ namespace formforproject
 {
     public partial class FormAddModifMarque : Form
     {
-        private Marque Marque;
-        public FormAddModifMarque(Marque Marque)
+        private int RefMarque;
+        public FormAddModifMarque(int RefMarque)
         {
             InitializeComponent();
-            this.Marque = Marque;
-            if (Marque != null)
+            this.RefMarque = RefMarque;
+            if (RefMarque>0)
             {
                 this.Text = "Modification Marque";
             }
@@ -31,30 +31,27 @@ namespace formforproject
         /// <param name="e"></param>
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            if (this.Marque != null)
+            Boolean IsMarqueNameTaken = MeinController.IsMarqueNameTaken(this.textBoxName.Text);
+            if (this.RefMarque < 0)
             {
-                Marque NewMarque = DBManager.getMarqueByName(this.Marque.Nom);
-                if (NewMarque == null)
+                if (!IsMarqueNameTaken)
                 {
-                    DBManager.insertMarque(this.Marque);
+                    MeinController.InsertMarque(this.textBoxName.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Cette marque existe déjà");
+                    MessageBox.Show("Cette Marque existe déjà");
                 }
             }
             else
             {
-                Marque NewMarque = DBManager.getMarqueByName(this.textBoxName.Text);
-                if (NewMarque == null)
+                if (!IsMarqueNameTaken)
                 {
-                    NewMarque = new Marque();
-                    NewMarque.Nom = this.textBoxName.Text;
-                    DBManager.insertMarque(NewMarque);
+                    MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
                 }
                 else
                 {
-                    MessageBox.Show("Cette marque existe déjà");
+                    MessageBox.Show("Cette Marque existe déjà");
                 }
 
             }

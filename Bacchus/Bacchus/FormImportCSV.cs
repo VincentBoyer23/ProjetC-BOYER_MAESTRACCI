@@ -88,7 +88,7 @@ namespace Bacchus
                     if (!firstLine)
                     {
 
-                        var inserted = MeinController.insertArticle(columns[1], columns[0], columns[3], columns[4], columns[2], float.Parse(columns[5]), 0);
+                        var inserted = MeinController.InsertArticleForCSVImport(columns[1], columns[0], columns[3], columns[4], columns[2], float.Parse(columns[5]), 0);
                         if (inserted) success++;
                         else failure++ ;
 

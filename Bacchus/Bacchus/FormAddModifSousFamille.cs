@@ -14,24 +14,47 @@ namespace formforproject
 {
     public partial class FormAddModifSousFamille : Form
     {
-        private SousFamille SousFamille;
-        public FormAddModifSousFamille(SousFamille SousFamille)
+        private int RefSousFamille;
+        public FormAddModifSousFamille(int RefSousFamille)
         {
             InitializeComponent();
-            this.SousFamille = SousFamille;
-            if (SousFamille != null)
+            this.RefSousFamille = RefSousFamille;
+            if (RefSousFamille>0)
             {
                 this.Text = "Modification SousFamille";
             }
             this.comboBoxFamille.DataSource = MeinController.GetAllFamilles();
             this.comboBoxFamille.DisplayMember = "nom";
-            this.comboBoxFamille.ValueMember = "refFamille";
+            this.comboBoxFamille.ValueMember = "nom";
             this.comboBoxFamille.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void Confirmbutton_Click(object sender, EventArgs e)
         {
+            Boolean IsSousFamilleNameTaken = MeinController.IsSousFamilleNameTaken(this.textBoxName.Text);
+            if (this.RefSousFamille < 0)
+            {
+                if (!IsSousFamilleNameTaken)
+                {
+                    MeinController.InsertSousFamille(this.textBoxName.Text, this.comboBoxFamille.SelectedText);
+                }
+                else
+                {
+                    MessageBox.Show("Cette SousFamille existe déjà");
+                }
+            }
+            else
+            {
+                if (!IsSousFamilleNameTaken)
+                {
+                    MeinController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedText);
+                }
+                else
+                {
+                    MessageBox.Show("Cette SousFamille existe déjà");
+                }
 
+            }
         }
     }
 }

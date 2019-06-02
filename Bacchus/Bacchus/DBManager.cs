@@ -15,20 +15,20 @@ namespace Bacchus
         /// <summary>
         /// Ajoute une famille dans la BDD
         /// </summary>
-        /// <param name="famille"></param>
+        /// <param name="Famille"></param>
         /// <returns></returns>
-        public static int insertFamille(Famille famille)
+        public static int InsertFamille(Famille Famille)
         {
             int inserted = 0;
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "INSERT INTO Familles(RefFamille, Nom) VALUES(@Ref, @Nom)";
             cmd.Prepare();
             cmd.Parameters.AddWithValue("@Ref", nextRefFamille);
-            cmd.Parameters.AddWithValue("@Nom", famille.Nom);
+            cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
             try
             {
                 inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) famille.RefFamille=nextRefFamille++;
+                if (inserted > 0) Famille.RefFamille=nextRefFamille++;
             }
             catch (SQLiteException e)
             {
@@ -38,23 +38,141 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Modifie une famille dans la BDD
+        /// </summary>
+        /// <param name="Famille"></param>
+        /// <returns></returns>
+        public static int UpdateFamille(Famille Famille)
+        {
+            int updated = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "UPDATE Familles SET Nom = @Nom WHERE RefFamille = @Ref";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", Famille.RefFamille);
+            cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
+            try
+            {
+                updated = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return updated;
+        }
+
+        /// <summary>
+        /// Supprime une famille dans la BDD
+        /// </summary>
+        /// <param name="RefFamille"></param>
+        /// <returns></returns>
+        public static int DeleteFamilleByRef(int RefFamille)
+        {
+            int deleted = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "DELETE FROM Familles WHERE RefFamille = @Ref";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", RefFamille);
+            try
+            {
+                deleted = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return deleted;
+        }
+
+        /// <summary>
         /// Ajoute une SousFamille dans la BDD
         /// </summary>
-        /// <param name="sousFamille"></param>
+        /// <param name="SousFamille"></param>
         /// <returns></returns>
-        public static int insertSousFamille(SousFamille sousFamille)
+        public static int InsertSousFamille(SousFamille SousFamille)
         {
             int inserted = 0;
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "INSERT INTO SousFamilles(RefSousFamille,RefFamille, Nom) VALUES(@Ref,@RefFamille, @Nom)";
             cmd.Prepare();
             cmd.Parameters.AddWithValue("@Ref", nextRefSousFamille);
-            cmd.Parameters.AddWithValue("@RefFamille", sousFamille.Famille.RefFamille);
-            cmd.Parameters.AddWithValue("@Nom", sousFamille.Nom);
+            cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
+            cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
             try
             {
                 inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) sousFamille.RefSousFamille=nextRefSousFamille++;
+                if (inserted > 0) SousFamille.RefSousFamille=nextRefSousFamille++;
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return inserted;
+        }
+
+        /// <summary>
+        /// Modifie une SousFamille dans la BDD
+        /// </summary>
+        /// <param name="SousFamille"></param>
+        /// <returns></returns>
+        public static int UpdateSousFamille(SousFamille SousFamille)
+        {
+            int updated = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "UPDATE SousFamilles SET Nom = @Nom, RefFamille = @RefFamille WHERE RefSousFamille = @Ref ";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", SousFamille.RefSousFamille);
+            cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
+            cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
+            try
+            {
+                updated = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return updated;
+        }
+        /// <summary>
+        /// Supprime une SousFamille de la BDD
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
+        /// <returns></returns>
+        public static int DeleteSousFamilleByRef(int RefSousFamille)
+        {
+            int deleted = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "DELETE FROM SousFamilles WHERE RefSousFamille = @Ref";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", RefSousFamille);
+            try
+            {
+                deleted = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return deleted;
+        }
+        /// <summary>
+        /// Ajoute une Marque dans la BDD
+        /// </summary>
+        /// <param name="Marque"></param>
+        /// <returns></returns>
+        public static int InsertMarque(Marque Marque)
+        {
+            int inserted = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "INSERT INTO Marques(RefMarque, Nom) VALUES(@Ref, @Nom)";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", nextRefMarque);
+            cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
+            try
+            {
+                inserted = cmd.ExecuteNonQuery();
+                if (inserted > 0) Marque.RefMarque = nextRefMarque++;
             }
             catch (SQLiteException e)
             {
@@ -63,28 +181,49 @@ namespace Bacchus
             return inserted;
         }
         /// <summary>
-        /// Ajoute une Marque dans la BDD
+        /// Modifie une Marque dans la BDD
         /// </summary>
-        /// <param name="marque"></param>
+        /// <param name="Marque"></param>
         /// <returns></returns>
-        public static int insertMarque(Marque marque)
+        public static int UpdateMarque(Marque Marque)
         {
-            int inserted = 0;
+            int updated = 0;
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "INSERT INTO Marques(RefMarque, Nom) VALUES(@Ref, @Nom)";
+            cmd.CommandText = "UPDATE Marques SET Nom = @Nom WHERE RefMarque = @Ref";
             cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", nextRefMarque);
-            cmd.Parameters.AddWithValue("@Nom", marque.Nom);
+            cmd.Parameters.AddWithValue("@Ref", Marque.RefMarque);
+            cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
             try
             {
-                inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) marque.RefMarque = nextRefMarque++;
+                updated = cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return inserted;
+            return updated;
+        }
+        /// <summary>
+        /// Supprime une Marque de la BDD
+        /// </summary>
+        /// <param name="RefMarque"></param>
+        /// <returns></returns>
+        public static int DeleteMarqueByRef(int RefMarque)
+        {
+            int deleted = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "DELETE FROM Marques WHERE RefMarque = @Ref";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", RefMarque);
+            try
+            {
+                deleted = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return deleted;
         }
         /// <summary>
         /// Supprime toute les données de la BDD
@@ -110,7 +249,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="refFamille"></param>
         /// <returns></returns>
-        public static Famille getFamilleByRef(int refFamille)
+        public static Famille GetFamilleByRef(int refFamille)
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Familles WHERE RefFamille = @Ref";
@@ -133,7 +272,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="refSousFamille"></param>
         /// <returns></returns>
-        public static SousFamille getSousFamilleByRef(int refSousFamille) //TODO : TEST
+        public static SousFamille GetSousFamilleByRef(int refSousFamille) //TODO : TEST
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM SousFamilles WHERE RefSousFamille = @ref";
@@ -143,7 +282,7 @@ namespace Bacchus
                 SousFamille sousfamille = null;
                 while (reader.Read())
                 {
-                    Famille famille = DBManager.getFamilleByRef(reader.GetInt32(1));
+                    Famille famille = DBManager.GetFamilleByRef(reader.GetInt32(1));
                     sousfamille = new SousFamille();
                     sousfamille.RefSousFamille = reader.GetInt32(0);
                     sousfamille.Famille = famille;
@@ -158,7 +297,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="nomFamille"></param>
         /// <returns></returns>
-        public static Famille getFamilleByName(string nomFamille)
+        public static Famille GetFamilleByName(string nomFamille)
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Familles WHERE Nom = @Nom";
@@ -181,7 +320,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="nomSousFamille"></param>
         /// <returns></returns>
-        public static SousFamille getSousFamilleByName(string nomSousFamille) //TODO : TEST
+        public static SousFamille GetSousFamilleByName(string nomSousFamille) //TODO : TEST
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM SousFamilles WHERE Nom = @Nom";
@@ -191,7 +330,7 @@ namespace Bacchus
                 SousFamille sousfamille = null;
                 while (reader.Read())
                 {
-                    Famille famille = DBManager.getFamilleByRef(reader.GetInt32(1));
+                    Famille famille = DBManager.GetFamilleByRef(reader.GetInt32(1));
 
 
                         sousfamille = new SousFamille();
@@ -209,7 +348,7 @@ namespace Bacchus
         /// </summary>
         /// <param name="nomMarque"></param>
         /// <returns></returns>
-        public static Marque getMarqueByName(string nomMarque)
+        public static Marque GetMarqueByName(string nomMarque)
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Marques WHERE Nom = @Nom";
@@ -231,7 +370,7 @@ namespace Bacchus
         /// récupère toutes les familles présentes dans la BDD
         /// </summary>
         /// <returns></returns>
-        public static List<Famille> getAllFamilles()
+        public static List<Famille> GetAllFamilles()
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Familles";
@@ -254,7 +393,7 @@ namespace Bacchus
         /// Récupère toutes les marques présentes dans la BDD
         /// </summary>
         /// <returns></returns>
-        public static List<Marque> getAllMarques()
+        public static List<Marque> GetAllMarques()
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Marques";
@@ -277,7 +416,7 @@ namespace Bacchus
         /// récupère toutes les SousFamilles présentes dans la BDD
         /// </summary>
         /// <returns></returns>
-        public static List<SousFamille> getAllSousFamilles()
+        public static List<SousFamille> GetAllSousFamilles()
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM SousFamilles SF JOIN Famille F ON SF.RefFamille=F.RefFamille";
@@ -304,7 +443,7 @@ namespace Bacchus
         /// récupère tous les Articles présents dans la BDD
         /// </summary>
         /// <returns></returns>
-        public static List<Article> getAllArticles()
+        public static List<Article> GetAllArticles()
         {
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "SELECT * FROM Articles A NATURAL JOIN Marques M JOIN SousFamilles SF ON A.RefSousFamille= SF.RefSousFamille  JOIN Familles F ON SF.RefFamille = F.RefFamille;";
@@ -343,22 +482,64 @@ namespace Bacchus
             }
         }
         /// <summary>
+        /// récupère un Article présents dans la BDD par sa référence
+        /// </summary>
+        /// <returns></returns>
+        public static Article GetArticleByRef(String RefArticle)
+        {
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "SELECT * FROM Articles A NATURAL JOIN Marques M JOIN SousFamilles SF ON A.RefSousFamille= SF.RefSousFamille  JOIN Familles F ON SF.RefFamille = F.RefFamille  WHERE RefArticle = @Ref;";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", RefArticle);
+            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            {
+                Marque marque = null;
+                Famille famille = null;
+                SousFamille sousFamille = null;
+                Article article = null;
+
+
+                while (reader.Read())
+                {
+                    marque = new Marque();
+                    famille = new Famille();
+                    sousFamille = new SousFamille();
+                    article = new Article();
+                    article.RefArticle = reader.GetString(0);
+                    article.Description = reader.GetString(1);
+                    sousFamille.RefSousFamille = reader.GetInt32(2);
+                    marque.RefMarque = reader.GetInt32(3);
+                    article.PrixHT = reader.GetFloat(4);
+                    marque.Nom = reader.GetString(6);
+                    famille.RefFamille = reader.GetInt32(8);
+                    sousFamille.Nom = reader.GetString(9);
+                    famille.Nom = reader.GetString(11);
+                    sousFamille.Famille = famille;
+                    article.SousFamille = sousFamille;
+                    article.Marque = marque;
+
+
+                }
+                return article;
+            }
+        }
+        /// <summary>
         /// Ajoute un Article à la BDD
         /// </summary>
-        /// <param name="article"></param>
+        /// <param name="Article"></param>
         /// <returns></returns>
-        public static bool insertArticle(Article article)
+        public static bool InsertArticle(Article Article)
         {
             bool inserted = true;
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
             cmd.CommandText = "INSERT INTO Articles(RefArticle, Description, RefSousFamille, RefMarque, PrixHT, Quantite) VALUES(@Ref,@Desc,@RefSousFamille,@RefMarque,@Prix,@Qt); ";
             cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", article.RefArticle);
-            cmd.Parameters.AddWithValue("@Desc", article.Description);
-            cmd.Parameters.AddWithValue("@RefSousFamille", article.SousFamille.RefSousFamille);
-            cmd.Parameters.AddWithValue("@RefMarque", article.Marque.RefMarque);
-            cmd.Parameters.AddWithValue("@Prix", article.PrixHT);
-            cmd.Parameters.AddWithValue("@Qt", article.Quantite);
+            cmd.Parameters.AddWithValue("@Ref", Article.RefArticle);
+            cmd.Parameters.AddWithValue("@Desc", Article.Description);
+            cmd.Parameters.AddWithValue("@RefSousFamille", Article.SousFamille.RefSousFamille);
+            cmd.Parameters.AddWithValue("@RefMarque", Article.Marque.RefMarque);
+            cmd.Parameters.AddWithValue("@Prix", Article.PrixHT);
+            cmd.Parameters.AddWithValue("@Qt", Article.Quantite);
             try
             {
                cmd.ExecuteNonQuery();
@@ -369,6 +550,56 @@ namespace Bacchus
                 inserted = false;
             }
             return inserted;
+        }
+        /// <summary>
+        /// Modifie un Article dans la BDD
+        /// </summary>
+        /// <param name="Article"></param>
+        /// <returns></returns>
+        public static bool UpdateArticle(Article Article)
+        {
+            bool updated = true;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "UPDATE Articles SET Description = @Desc, RefSousFamille = @RefSousFamille, RefMarque = @RefMarque, PrixHT = @Prix, Quantite = @Qt WHERE RefArticle=@Ref; ";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", Article.RefArticle);
+            cmd.Parameters.AddWithValue("@Desc", Article.Description);
+            cmd.Parameters.AddWithValue("@RefSousFamille", Article.SousFamille.RefSousFamille);
+            cmd.Parameters.AddWithValue("@RefMarque", Article.Marque.RefMarque);
+            cmd.Parameters.AddWithValue("@Prix", Article.PrixHT);
+            cmd.Parameters.AddWithValue("@Qt", Article.Quantite);
+            try
+            {
+                cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+                updated = false;
+            }
+            return updated;
+        }
+        /// <summary>
+        /// Supprime un article de la BDD
+        /// </summary>
+        /// <param name="RefArticle"></param>
+        /// <returns></returns>
+        public static int DeleteArticleByRef(String RefArticle)
+        {
+            int deleted = 0;
+            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
+            cmd.CommandText = "DELETE FROM Artcles WHERE RefArticle = @Ref";
+            cmd.Prepare();
+            cmd.Parameters.AddWithValue("@Ref", RefArticle);
+            try
+            {
+                deleted = cmd.ExecuteNonQuery();
+            }
+            catch (SQLiteException e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return deleted;
         }
         /// <summary>
         /// Met à jour les réfèrences de chaque table afin de pouvoir incrémenter correctement lors de l'ajout d'un objet dans la table

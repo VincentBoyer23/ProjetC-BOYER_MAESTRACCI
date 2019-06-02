@@ -1,6 +1,5 @@
 ﻿
 using Bacchus.Controller;
-using Bacchus.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,12 +14,12 @@ namespace formforproject
 {
     public partial class FormAddModifFamille : Form
     {
-        private Famille Famille;
-        public FormAddModifFamille(Famille Famille)
+        private int RefFamille;
+        public FormAddModifFamille(int RefFamille)
         {
             InitializeComponent();
-            this.Famille = Famille;
-            if(Famille!=null)
+            this.RefFamille = RefFamille;
+            if(RefFamille>0)
             {
                 this.Text = "Modification Famille";
             }
@@ -33,12 +32,12 @@ namespace formforproject
         /// <param name="e"></param>
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-           /* if (this.Famille != null)
+            Boolean IsFamilleNameTaken = MeinController.IsFamilleNameTaken(this.textBoxName.Text);
+           if (this.RefFamille<0)
             {
-                Famille NewFamille = MeinController.GetFamilleByName(this.Famille.Nom);
-                if(NewFamille==null)
+                if (!IsFamilleNameTaken)
                 {
-                    MeinController.insertFamille(this.Famille);
+                    MeinController.InsertFamille(this.textBoxName.Text);
                 }
                 else
                 {
@@ -47,19 +46,16 @@ namespace formforproject
             }
             else
             {
-                Famille NewFamille = DBManager.getFamilleByName(this.textBoxName.Text);
-                if (NewFamille == null)
+                if (!IsFamilleNameTaken)
                 {
-                    NewFamille = new Famille();
-                    NewFamille.Nom = this.textBoxName.Text;
-                    DBManager.insertFamille(NewFamille);
+                    MeinController.UpdateFamille(this.RefFamille, this.textBoxName.Text);
                 }
                 else
                 {
                     MessageBox.Show("Cette famille existe déjà");
                 }
 
-            }*/
+            }
 
         }
     }
