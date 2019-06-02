@@ -43,6 +43,8 @@ namespace formforproject
                 if (!IsFamilleNameTaken)
                 {
                     MeinController.InsertFamille(this.textBoxName.Text);
+                    MessageBox.Show("Famille Ajoutée");
+                    this.Dispose();
                 }
                 else
                 {
@@ -54,12 +56,16 @@ namespace formforproject
                 if (!IsFamilleNameTaken)
                 {
                     MeinController.UpdateFamille(this.RefFamille, this.textBoxName.Text);
+                    MessageBox.Show("Famille Modifiée");
+                    this.Dispose();
                 }
                 else
                 {
                     if (this.textBoxName.Text.Equals(NameFamille))
                     {
                         MeinController.UpdateFamille(this.RefFamille, this.textBoxName.Text);
+                        MessageBox.Show("Famille Modifiée");
+                        this.Dispose();
                     }
                     else
                         MessageBox.Show("Cette famille existe déjà");

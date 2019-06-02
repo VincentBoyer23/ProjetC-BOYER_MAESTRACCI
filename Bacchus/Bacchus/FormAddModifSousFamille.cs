@@ -44,6 +44,8 @@ namespace formforproject
                 if (!IsSousFamilleNameTaken)
                 {
                     MeinController.InsertSousFamille(this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                    MessageBox.Show("SousFamille Ajoutée");
+                    this.Dispose();
                 }
                 else
                 {
@@ -55,12 +57,16 @@ namespace formforproject
                 if (!IsSousFamilleNameTaken)
                 {
                     MeinController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                    MessageBox.Show("SousFamille Modifiée");
+                    this.Dispose();
                 }
                 else
                 {
                     if(this.textBoxName.Text.Equals(NameSousFamille))
                     {
                         MeinController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                        MessageBox.Show("SousFamille Modifiée");
+                        this.Dispose();
                     }
                     else
                     MessageBox.Show("Cette SousFamille existe déjà");

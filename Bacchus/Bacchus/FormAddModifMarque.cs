@@ -42,6 +42,8 @@ namespace formforproject
                 if (!IsMarqueNameTaken)
                 {
                     MeinController.InsertMarque(this.textBoxName.Text);
+                    MessageBox.Show("Marque Ajoutée");
+                    this.Dispose();
                 }
                 else
                 {
@@ -53,12 +55,16 @@ namespace formforproject
                 if (!IsMarqueNameTaken)
                 {
                     MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
+                    MessageBox.Show("Marque Modifiée");
+                    this.Dispose();
                 }
                 else
                 {
                     if (this.textBoxName.Text.Equals(NameMarque))
                     {
                         MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
+                        MessageBox.Show("Marque Modifiée");
+                        this.Dispose();
                     }
                     else
                         MessageBox.Show("Cette Marque existe déjà");

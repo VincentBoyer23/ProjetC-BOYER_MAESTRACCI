@@ -42,11 +42,11 @@ namespace Bacchus
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            /*Application.Run(new FormMain());*/
+            Application.Run(new FormMain());
             /*Application.Run(new FormAddModifFamille(8));*/
             /*Application.Run(new FormAddModifMarque(31));*/
             /*Application.Run(new FormAddModifSousFamille(19));*/
-            Application.Run(new FormAddModifArticle("F5223222"));
+            /*Application.Run(new FormAddModifArticle("F5223222"));*/
             //DBManager.MajRef();
             //Console.WriteLine(DBManager.nextRefFamille);
 

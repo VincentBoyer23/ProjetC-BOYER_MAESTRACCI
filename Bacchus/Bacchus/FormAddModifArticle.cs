@@ -58,6 +58,8 @@ namespace formforproject
                     if (!IsArticleRefTaken)
                     {
                         MeinController.InsertArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
+                        MessageBox.Show("Article Ajouté");
+                        this.Dispose();
                     }
                     else
                     {
@@ -67,6 +69,8 @@ namespace formforproject
                 else
                 { 
                     MeinController.UpdateArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
+                    MessageBox.Show("Article Modifié");
+                    this.Dispose();
                 }  
             }
             else
