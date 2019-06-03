@@ -1,5 +1,9 @@
 ﻿namespace Bacchus
 {
+
+    /// <summary>
+    /// Fenêtre export vers fichier CSV.
+    /// </summary>
     partial class FormExportCSV
     {
         /// <summary>

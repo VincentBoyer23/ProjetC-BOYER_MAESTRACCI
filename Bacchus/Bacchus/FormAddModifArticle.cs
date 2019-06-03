@@ -1,39 +1,39 @@
 ﻿using Bacchus.Controller;
 using Bacchus.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace formforproject
 {
-    
+    /// <summary>
+    /// Formulaire d'ajout/modification d'article.
+    /// </summary>
     public partial class FormAddModifArticle : Form
     {
-        private String RefArticle;
+        private string RefArticle;
+
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="RefArticle"></param>
         public FormAddModifArticle(String RefArticle)
         {
             InitializeComponent();
             this.RefArticle = RefArticle;
-            this.comboBoxSousFamille.DataSource = MeinController.GetAllSousFamilles();
+            this.comboBoxSousFamille.DataSource = MainController.GetAllSousFamilles();
             this.comboBoxSousFamille.DisplayMember = "nom";
             this.comboBoxSousFamille.ValueMember = "nom";
             this.comboBoxSousFamille.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBoxMarque.DataSource = MeinController.GetAllMarques();
+            this.comboBoxMarque.DataSource = MainController.GetAllMarques();
             this.comboBoxMarque.DisplayMember = "nom";
             this.comboBoxMarque.ValueMember = "nom";
             this.comboBoxMarque.DropDownStyle = ComboBoxStyle.DropDownList;
             if (RefArticle!=null)
             {
-                Article article = MeinController.GetArticleByRef(RefArticle);
-                this.Text = "Modification SousFamille";
+                Article article = MainController.GetArticleByRef(RefArticle);
+                this.Text = "Modification Article";
                 this.textBoxRefArticle.Text = RefArticle;
                 this.textBoxRefArticle.Enabled = false;
                 this.richTextBoxDesc.Text = article.Description;
@@ -48,16 +48,16 @@ namespace formforproject
 
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            Boolean IsArticleRefTaken = MeinController.IsArticleRefTaken(this.textBoxRefArticle.Text);
+            Boolean IsArticleRefTaken = MainController.IsArticleRefTaken(this.textBoxRefArticle.Text);
             if ((new Regex(@"^\d*\.?\d*$")).IsMatch(textBoxPrixHT.Text) && (new Regex(@"^[0-9]\d*$")).IsMatch(textBoxQuantite.Text))
             {
                 if (RefArticle == null)
                 {
                     if (!IsArticleRefTaken)
                     {
-                        MeinController.InsertArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
+                        MainController.InsertArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
                         MessageBox.Show("Article Ajouté");
                         this.Dispose();
                     }
@@ -68,14 +68,14 @@ namespace formforproject
                 }
                 else
                 { 
-                    MeinController.UpdateArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
+                    MainController.UpdateArticle(this.textBoxRefArticle.Text, this.richTextBoxDesc.Text, this.comboBoxSousFamille.SelectedValue.ToString(), this.comboBoxMarque.SelectedValue.ToString(), float.Parse(this.textBoxPrixHT.Text, CultureInfo.InvariantCulture.NumberFormat), Convert.ToInt32(this.textBoxQuantite.Text));
                     MessageBox.Show("Article Modifié");
                     this.Dispose();
                 }  
             }
             else
             {
-                MessageBox.Show("Veuillez à ce que le prix unitaire soit un nombre décimale positif et que la quantité soit un entier positif");
+                MessageBox.Show("Veillez à ce que le prix unitaire soit un nombre décimale positif et que la quantité soit un entier positif");
             }
 
 }

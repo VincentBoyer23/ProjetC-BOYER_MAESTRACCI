@@ -1,32 +1,34 @@
 ﻿using Bacchus.Controller;
 using Bacchus.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace formforproject
 {
+
+    /// <summary>
+    /// Formulaire création/modification sous famille.
+    /// </summary>
     public partial class FormAddModifSousFamille : Form
     {
         private int RefSousFamille;
         private String NameSousFamille;
+
+        /// <summary>
+        /// Constructeur formulaire.
+        /// </summary>
+        /// <param name="RefSousFamille"></param>
         public FormAddModifSousFamille(int RefSousFamille)
         {
             InitializeComponent();
             this.RefSousFamille = RefSousFamille;
-            this.comboBoxFamille.DataSource = MeinController.GetAllFamilles();
+            this.comboBoxFamille.DataSource = MainController.GetAllFamilles();
             this.comboBoxFamille.DisplayMember = "nom";
             this.comboBoxFamille.ValueMember = "nom";
             this.comboBoxFamille.DropDownStyle = ComboBoxStyle.DropDownList;
             if (RefSousFamille>0)
             {
-                SousFamille SousFamille = MeinController.GetSousFamilleByRef(RefSousFamille);
+                SousFamille SousFamille = MainController.GetSousFamilleByRef(RefSousFamille);
                 this.Text = "Modification SousFamille";
                 this.textBoxName.Text = SousFamille.Nom;
                 NameSousFamille = SousFamille.Nom;
@@ -38,12 +40,12 @@ namespace formforproject
 
         private void Confirmbutton_Click(object sender, EventArgs e)
         {
-            Boolean IsSousFamilleNameTaken = MeinController.IsSousFamilleNameTaken(this.textBoxName.Text);
+            Boolean IsSousFamilleNameTaken = MainController.IsSousFamilleNameTaken(this.textBoxName.Text);
             if (this.RefSousFamille < 0)
             {
                 if (!IsSousFamilleNameTaken)
                 {
-                    MeinController.InsertSousFamille(this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                    MainController.InsertSousFamille(this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
                     MessageBox.Show("SousFamille Ajoutée");
                     this.Dispose();
                 }
@@ -56,7 +58,7 @@ namespace formforproject
             {
                 if (!IsSousFamilleNameTaken)
                 {
-                    MeinController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                    MainController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
                     MessageBox.Show("SousFamille Modifiée");
                     this.Dispose();
                 }
@@ -64,7 +66,7 @@ namespace formforproject
                 {
                     if(this.textBoxName.Text.Equals(NameSousFamille))
                     {
-                        MeinController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
+                        MainController.UpdateSousFamille(this.RefSousFamille, this.textBoxName.Text, this.comboBoxFamille.SelectedValue.ToString());
                         MessageBox.Show("SousFamille Modifiée");
                         this.Dispose();
                     }

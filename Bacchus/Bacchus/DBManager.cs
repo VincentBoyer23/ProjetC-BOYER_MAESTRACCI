@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Bacchus.Model;
 namespace Bacchus
 {
     class DBManager
     {
-        public static int nextRefFamille = 1;
-        public static int nextRefSousFamille = 1;
-        public static int nextRefMarque = 1;
+        public static int NextRefFamille = 1;
+        public static int NextRefSousFamille = 1;
+        public static int NextRefMarque = 1;
+
         /// <summary>
         /// Ajoute une famille dans la BDD
         /// </summary>
@@ -20,22 +17,22 @@ namespace Bacchus
         /// <returns></returns>
         public static int InsertFamille(Famille Famille)
         {
-            int inserted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "INSERT INTO Familles(RefFamille, Nom) VALUES(@Ref, @Nom)";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", nextRefFamille);
-            cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
+            int Inserted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "INSERT INTO Familles(RefFamille, Nom) VALUES(@Ref, @Nom)";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", NextRefFamille);
+            Cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
             try
             {
-                inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) Famille.RefFamille=nextRefFamille++;
+                Inserted = Cmd.ExecuteNonQuery();
+                if (Inserted > 0) Famille.RefFamille=NextRefFamille++;
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return inserted;
+            return Inserted;
         }
 
         /// <summary>
@@ -45,21 +42,21 @@ namespace Bacchus
         /// <returns></returns>
         public static int UpdateFamille(Famille Famille)
         {
-            int updated = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "UPDATE Familles SET Nom = @Nom WHERE RefFamille = @Ref";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", Famille.RefFamille);
-            cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
+            int Updated = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "UPDATE Familles SET Nom = @Nom WHERE RefFamille = @Ref";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", Famille.RefFamille);
+            Cmd.Parameters.AddWithValue("@Nom", Famille.Nom);
             try
             {
-                updated = cmd.ExecuteNonQuery();
+                Updated = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return updated;
+            return Updated;
         }
 
         /// <summary>
@@ -69,20 +66,20 @@ namespace Bacchus
         /// <returns></returns>
         public static int DeleteFamilleByRef(int RefFamille)
         {
-            int deleted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "DELETE FROM Familles WHERE RefFamille = @Ref";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", RefFamille);
+            int Deleted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "DELETE FROM Familles WHERE RefFamille = @Ref";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", RefFamille);
             try
             {
-                deleted = cmd.ExecuteNonQuery();
+                Deleted = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return deleted;
+            return Deleted;
         }
 
         /// <summary>
@@ -92,23 +89,23 @@ namespace Bacchus
         /// <returns></returns>
         public static int InsertSousFamille(SousFamille SousFamille)
         {
-            int inserted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "INSERT INTO SousFamilles(RefSousFamille,RefFamille, Nom) VALUES(@Ref,@RefFamille, @Nom)";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", nextRefSousFamille);
-            cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
-            cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
+            int Inserted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "INSERT INTO SousFamilles(RefSousFamille,RefFamille, Nom) VALUES(@Ref,@RefFamille, @Nom)";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", NextRefSousFamille);
+            Cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
+            Cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
             try
             {
-                inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) SousFamille.RefSousFamille=nextRefSousFamille++;
+                Inserted = Cmd.ExecuteNonQuery();
+                if (Inserted > 0) SousFamille.RefSousFamille=NextRefSousFamille++;
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return inserted;
+            return Inserted;
         }
 
         /// <summary>
@@ -118,22 +115,22 @@ namespace Bacchus
         /// <returns></returns>
         public static int UpdateSousFamille(SousFamille SousFamille)
         {
-            int updated = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "UPDATE SousFamilles SET Nom = @Nom, RefFamille = @RefFamille WHERE RefSousFamille = @Ref ";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", SousFamille.RefSousFamille);
-            cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
-            cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
+            int Updated = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "UPDATE SousFamilles SET Nom = @Nom, RefFamille = @RefFamille WHERE RefSousFamille = @Ref ";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", SousFamille.RefSousFamille);
+            Cmd.Parameters.AddWithValue("@RefFamille", SousFamille.Famille.RefFamille);
+            Cmd.Parameters.AddWithValue("@Nom", SousFamille.Nom);
             try
             {
-                updated = cmd.ExecuteNonQuery();
+                Updated = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return updated;
+            return Updated;
         }
         /// <summary>
         /// Supprime une SousFamille de la BDD
@@ -142,20 +139,20 @@ namespace Bacchus
         /// <returns></returns>
         public static int DeleteSousFamilleByRef(int RefSousFamille)
         {
-            int deleted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "DELETE FROM SousFamilles WHERE RefSousFamille = @Ref";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", RefSousFamille);
+            int Deleted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "DELETE FROM SousFamilles WHERE RefSousFamille = @Ref";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", RefSousFamille);
             try
             {
-                deleted = cmd.ExecuteNonQuery();
+                Deleted = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return deleted;
+            return Deleted;
         }
         /// <summary>
         /// Ajoute une Marque dans la BDD
@@ -164,22 +161,22 @@ namespace Bacchus
         /// <returns></returns>
         public static int InsertMarque(Marque Marque)
         {
-            int inserted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "INSERT INTO Marques(RefMarque, Nom) VALUES(@Ref, @Nom)";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", nextRefMarque);
-            cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
+            int Inserted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "INSERT INTO Marques(RefMarque, Nom) VALUES(@Ref, @Nom)";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", NextRefMarque);
+            Cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
             try
             {
-                inserted = cmd.ExecuteNonQuery();
-                if (inserted > 0) Marque.RefMarque = nextRefMarque++;
+                Inserted = Cmd.ExecuteNonQuery();
+                if (Inserted > 0) Marque.RefMarque = NextRefMarque++;
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return inserted;
+            return Inserted;
         }
         /// <summary>
         /// Modifie une Marque dans la BDD
@@ -188,21 +185,21 @@ namespace Bacchus
         /// <returns></returns>
         public static int UpdateMarque(Marque Marque)
         {
-            int updated = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "UPDATE Marques SET Nom = @Nom WHERE RefMarque = @Ref";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", Marque.RefMarque);
-            cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
+            int Updated = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "UPDATE Marques SET Nom = @Nom WHERE RefMarque = @Ref";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", Marque.RefMarque);
+            Cmd.Parameters.AddWithValue("@Nom", Marque.Nom);
             try
             {
-                updated = cmd.ExecuteNonQuery();
+                Updated = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return updated;
+            return Updated;
         }
         /// <summary>
         /// Supprime une Marque de la BDD
@@ -211,51 +208,51 @@ namespace Bacchus
         /// <returns></returns>
         public static int DeleteMarqueByRef(int RefMarque)
         {
-            int deleted = 0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "DELETE FROM Marques WHERE RefMarque = @Ref";
-            cmd.Prepare();
-            cmd.Parameters.AddWithValue("@Ref", RefMarque);
+            int Deleted = 0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "DELETE FROM Marques WHERE RefMarque = @Ref";
+            Cmd.Prepare();
+            Cmd.Parameters.AddWithValue("@Ref", RefMarque);
             try
             {
-                deleted = cmd.ExecuteNonQuery();
+                Deleted = Cmd.ExecuteNonQuery();
             }
             catch (SQLiteException e)
             {
                 Console.WriteLine(e.Message);
             }
-            return deleted;
+            return Deleted;
         }
         /// <summary>
         /// Supprime toute les données de la BDD
         /// </summary>
         /// <returns></returns>
-        public static int WIPEOUT()
+        public static int PurgeBDD()
         {
-            int rowDeleted=0;
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "DELETE FROM Marques";
-            rowDeleted += cmd.ExecuteNonQuery();
-            cmd.CommandText = "DELETE FROM Articles";
-            rowDeleted += cmd.ExecuteNonQuery();
-            cmd.CommandText = "DELETE FROM Familles";
-            rowDeleted += cmd.ExecuteNonQuery();
-            cmd.CommandText = "DELETE FROM SousFamilles";
-            rowDeleted += cmd.ExecuteNonQuery();
+            int RowDeleted=0;
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "DELETE FROM Marques";
+            RowDeleted += Cmd.ExecuteNonQuery();
+            Cmd.CommandText = "DELETE FROM Articles";
+            RowDeleted += Cmd.ExecuteNonQuery();
+            Cmd.CommandText = "DELETE FROM Familles";
+            RowDeleted += Cmd.ExecuteNonQuery();
+            Cmd.CommandText = "DELETE FROM SousFamilles";
+            RowDeleted += Cmd.ExecuteNonQuery();
 
-            return rowDeleted;
+            return RowDeleted;
         }
         /// <summary>
         /// Récupère une Famille par sa référence
         /// </summary>
-        /// <param name="refFamille"></param>
+        /// <param name="RefFamille"></param>
         /// <returns></returns>
-        public static Famille GetFamilleByRef(int refFamille)
+        public static Famille GetFamilleByRef(int RefFamille)
         {
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "SELECT * FROM Familles WHERE RefFamille = @Ref";
-            cmd.Parameters.AddWithValue("@Ref", refFamille);
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "SELECT * FROM Familles WHERE RefFamille = @Ref";
+            Cmd.Parameters.AddWithValue("@Ref", RefFamille);
+            using (SQLiteDataReader reader = Cmd.ExecuteReader())
             {
                 Famille famille = null;
                 while (reader.Read())
@@ -270,16 +267,36 @@ namespace Bacchus
         }
 
         /// <summary>
+        /// Retourne le nombre d'articles dans la BDD
+        /// </summary>
+        /// <returns></returns>
+        public static int GetNbArticles()
+        {
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "SELECT COUNT(*) FROM Articles";
+            using (SQLiteDataReader reader = Cmd.ExecuteReader())
+            {
+                int Nb = 0;
+                while (reader.Read())
+                {
+                    Nb = reader.GetInt32(0);
+
+                }
+                return Nb;
+            }
+        }
+
+        /// <summary>
         /// Récupère une Marque par sa référence
         /// </summary>
-        /// <param name="refFamille"></param>
+        /// <param name="RefMarque"></param>
         /// <returns></returns>
-        public static Marque GetMarqueByRef(int refMarque)
+        public static Marque GetMarqueByRef(int RefMarque)
         {
-            SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "SELECT * FROM Marques WHERE RefMarque = @Ref";
-            cmd.Parameters.AddWithValue("@Ref", refMarque);
-            using (SQLiteDataReader reader = cmd.ExecuteReader())
+            SQLiteCommand Cmd = new SQLiteCommand(DBConnection.Instance);
+            Cmd.CommandText = "SELECT * FROM Marques WHERE RefMarque = @Ref";
+            Cmd.Parameters.AddWithValue("@Ref", RefMarque);
+            using (SQLiteDataReader reader = Cmd.ExecuteReader())
             {
                 Marque Marque = null;
                 while (reader.Read())
@@ -493,6 +510,7 @@ namespace Bacchus
                     sousFamille.RefSousFamille = reader.GetInt32(2);
                     marque.RefMarque = reader.GetInt32(3);
                     article.PrixHT = reader.GetFloat(4);
+                    article.Quantite = reader.GetInt32(5);
                     marque.Nom = reader.GetString(6);
                     famille.RefFamille = reader.GetInt32(8);
                     sousFamille.Nom = reader.GetString(9);
@@ -616,7 +634,7 @@ namespace Bacchus
         {
             int deleted = 0;
             SQLiteCommand cmd = new SQLiteCommand(DBConnection.Instance);
-            cmd.CommandText = "DELETE FROM Artcles WHERE RefArticle = @Ref";
+            cmd.CommandText = "DELETE FROM Articles WHERE RefArticle = @Ref";
             cmd.Prepare();
             cmd.Parameters.AddWithValue("@Ref", RefArticle);
             try
@@ -644,11 +662,11 @@ namespace Bacchus
                     if (reader["nextID"].ToString() != "")
                     {
                         nextID = Int32.Parse(reader["nextID"].ToString());
-                        nextRefFamille = ++nextID;
+                        NextRefFamille = ++nextID;
                     }
                     else
                     {
-                        nextRefFamille = 1;
+                        NextRefFamille = 1;
                     }
                 }
             }
@@ -660,11 +678,11 @@ namespace Bacchus
                     if (reader["nextID"].ToString() != "")
                     {
                         nextID = Int32.Parse(reader["nextID"].ToString());
-                        nextRefMarque = ++nextID;
+                        NextRefMarque = ++nextID;
                     }
                     else
                     {
-                        nextRefMarque = 1;
+                        NextRefMarque = 1;
                     }
                 }
             }
@@ -676,11 +694,11 @@ namespace Bacchus
                     if (reader["nextID"].ToString() != "")
                     {
                         nextID = Int32.Parse(reader["nextID"].ToString());
-                        nextRefSousFamille = ++nextID;
+                        NextRefSousFamille = ++nextID;
                     }
                     else
                     {
-                        nextRefSousFamille = 1;
+                        NextRefSousFamille = 1;
                     }
                 }
             }

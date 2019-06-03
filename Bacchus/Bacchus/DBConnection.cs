@@ -2,6 +2,10 @@
 
 namespace Bacchus
 {
+    /// <summary>
+    /// Singleton permmettant une seule connection à la BDD.
+    /// Thread Safe
+    /// </summary>
     public sealed class DBConnection
     {
         /// <summary>

@@ -1,29 +1,29 @@
-﻿using Bacchus;
-using Bacchus.Controller;
+﻿using Bacchus.Controller;
 using Bacchus.Model;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace formforproject
 {
+    /// <summary>
+    /// Formulaire création/modification marque.
+    /// </summary>
     public partial class FormAddModifMarque : Form
     {
         private int RefMarque;
         private String NameMarque;
+
+        /// <summary>
+        /// Constructeur formulaire
+        /// </summary>
+        /// <param name="RefMarque"></param>
         public FormAddModifMarque(int RefMarque)
         {
             InitializeComponent();
             this.RefMarque = RefMarque;
             if (RefMarque>0)
             {
-                Marque Marque = MeinController.GetMarqueByRef(RefMarque);
+                Marque Marque = MainController.GetMarqueByRef(RefMarque);
                 this.Text = "Modification Marque";
                 this.textBoxName.Text = Marque.Nom;
                 NameMarque = Marque.Nom;
@@ -36,12 +36,12 @@ namespace formforproject
         /// <param name="e"></param>
         private void ButtonConfirm_Click(object sender, EventArgs e)
         {
-            Boolean IsMarqueNameTaken = MeinController.IsMarqueNameTaken(this.textBoxName.Text);
+            Boolean IsMarqueNameTaken = MainController.IsMarqueNameTaken(this.textBoxName.Text);
             if (this.RefMarque < 0)
             {
                 if (!IsMarqueNameTaken)
                 {
-                    MeinController.InsertMarque(this.textBoxName.Text);
+                    MainController.InsertMarque(this.textBoxName.Text);
                     MessageBox.Show("Marque Ajoutée");
                     this.Dispose();
                 }
@@ -54,7 +54,7 @@ namespace formforproject
             {
                 if (!IsMarqueNameTaken)
                 {
-                    MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
+                    MainController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
                     MessageBox.Show("Marque Modifiée");
                     this.Dispose();
                 }
@@ -62,7 +62,7 @@ namespace formforproject
                 {
                     if (this.textBoxName.Text.Equals(NameMarque))
                     {
-                        MeinController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
+                        MainController.UpdateMarque(this.RefMarque, this.textBoxName.Text);
                         MessageBox.Show("Marque Modifiée");
                         this.Dispose();
                     }

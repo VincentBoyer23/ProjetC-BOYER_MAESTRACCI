@@ -1,5 +1,8 @@
 ﻿namespace formforproject
 {
+    /// <summary>
+    /// Formulaire de création/modication d'une famille.
+    /// </summary>
     partial class FormAddModifFamille
     {
         /// <summary>

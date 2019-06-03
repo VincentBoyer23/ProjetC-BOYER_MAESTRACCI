@@ -1,0 +1,100 @@
+﻿using System;
+using System.Windows.Forms;
+
+namespace Bacchus
+{
+
+    /// <summary>
+    /// Class permettant de comparer les colonnes de la ListView.
+    /// </summary>
+    /// <remarks>
+    /// Code provenant de http://csharphelper.com/blog/2014/09/sort-a-listview-using-the-column-you-click-in-c/
+    /// </remarks>
+    public class ListViewComparer : System.Collections.IComparer
+    {
+        private int ColumnNumber;
+        private SortOrder SortOrder;
+
+        /// <summary>
+        /// Constructeur.
+        /// </summary>
+        /// <param name="column_number"></param>
+        /// <param name="sort_order"></param>
+        public ListViewComparer(int column_number,
+            SortOrder sort_order)
+        {
+            ColumnNumber = column_number;
+            SortOrder = sort_order;
+        }
+
+        /// <summary>
+        /// Compare deux objets.
+        /// </summary>
+        /// <param name="object_x"></param>
+        /// <param name="object_y"></param>
+        /// <returns></returns>
+        public int Compare(object object_x, object object_y)
+        {
+            // Get the objects as ListViewItems.
+            ListViewItem item_x = object_x as ListViewItem;
+            ListViewItem item_y = object_y as ListViewItem;
+
+            // Get the corresponding sub-item values.
+            string string_x;
+            if (item_x.SubItems.Count <= ColumnNumber)
+            {
+                string_x = "";
+            }
+            else
+            {
+                string_x = item_x.SubItems[ColumnNumber].Text;
+            }
+
+            string string_y;
+            if (item_y.SubItems.Count <= ColumnNumber)
+            {
+                string_y = "";
+            }
+            else
+            {
+                string_y = item_y.SubItems[ColumnNumber].Text;
+            }
+
+            // Compare them.
+            int result;
+            double double_x, double_y;
+            if (double.TryParse(string_x, out double_x) &&
+                double.TryParse(string_y, out double_y))
+            {
+                // Treat as a number.
+                result = double_x.CompareTo(double_y);
+            }
+            else
+            {
+                DateTime date_x, date_y;
+                if (DateTime.TryParse(string_x, out date_x) &&
+                    DateTime.TryParse(string_y, out date_y))
+                {
+                    // Treat as a date.
+                    result = date_x.CompareTo(date_y);
+                }
+                else
+                {
+                    // Treat as a string.
+                    result = string_x.CompareTo(string_y);
+                }
+            }
+
+            // Return the correct result depending on whether
+            // we're sorting ascending or descending.
+            if (SortOrder == SortOrder.Ascending)
+            {
+                return result;
+            }
+            else
+            {
+                return -result;
+            }
+        }
+    }
+}

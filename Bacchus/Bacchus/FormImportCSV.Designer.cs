@@ -1,5 +1,8 @@
 ﻿namespace Bacchus
 {
+    /// <summary>
+    /// Fenêtre import de fichier CSV.
+    /// </summary>
     partial class FormImportCSV
     {
         /// <summary>

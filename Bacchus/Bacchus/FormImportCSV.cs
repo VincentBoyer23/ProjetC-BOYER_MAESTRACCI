@@ -1,14 +1,17 @@
 ﻿using Bacchus.Controller;
 using System;
 using System.IO;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Bacchus
 {
     public partial class FormImportCSV : Form
     {
-        int countCurrentFile;
+        int CountCurrentFile;
+
+        /// <summary>
+        /// Constructeur fenêtre.
+        /// </summary>
         public FormImportCSV()
         {
             InitializeComponent();
@@ -43,7 +46,7 @@ namespace Bacchus
                     {
                         count++;
                     }
-                    countCurrentFile = count;
+                    CountCurrentFile = count;
                     opf.Dispose();
                 }
 
@@ -62,8 +65,8 @@ namespace Bacchus
         /// <param name="e"></param>
         private void buttonWipeAddDB_Click(object sender, EventArgs e)
         {
-            textBoxLog.AppendText("c'est la purge, cachez-vous, "+MeinController.DEUSVULT()+ " rows deleted\r\n\r\n");
-            MeinController.PourJérusalem();
+            textBoxLog.AppendText("c'est la purge, cachez-vous, "+MainController.PurgeBDD()+ " rows deleted\r\n\r\n");
+            MainController.MajRefs();
             addToBDD();
         }
         /// <summary>
@@ -77,7 +80,7 @@ namespace Bacchus
                 string line;
                 string[] columns = new string[6];
                 bool firstLine = true;
-                progressBarImport.Maximum = countCurrentFile - 1;
+                progressBarImport.Maximum = CountCurrentFile - 1;
                 progressBarImport.Value = 0;
                 int success = 0, failure = 0;
                 while ((line = sr.ReadLine()) != null)
@@ -88,7 +91,7 @@ namespace Bacchus
                     if (!firstLine)
                     {
 
-                        var inserted = MeinController.InsertArticleForCSVImport(columns[1], columns[0], columns[3], columns[4], columns[2], float.Parse(columns[5]), 0);
+                        var inserted = MainController.InsertArticleForCSVImport(columns[1], columns[0], columns[3], columns[4], columns[2], float.Parse(columns[5]), 0);
                         if (inserted) success++;
                         else failure++ ;
 

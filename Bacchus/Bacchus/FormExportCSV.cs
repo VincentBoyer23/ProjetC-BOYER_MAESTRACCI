@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using Bacchus.Controller;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Bacchus.Model;
 
@@ -15,6 +9,9 @@ namespace Bacchus
 {
     public partial class FormExportCSV : Form
     {
+        /// <summary>
+        /// Constructeur fenêtre.
+        /// </summary>
         public FormExportCSV()
         {
             InitializeComponent();
@@ -46,7 +43,7 @@ namespace Bacchus
         private void buttonExport_Click(object sender, EventArgs e)
         {
             var fileName = textBoxFileName.Text;
-            List<Article> articles = MeinController.GetAllArticles();
+            List<Article> articles = MainController.GetAllArticles();
             progressBarExport.Maximum = articles.Count;
             progressBarExport.Value = 0;
             using (StreamWriter sw = new StreamWriter(fileName))
