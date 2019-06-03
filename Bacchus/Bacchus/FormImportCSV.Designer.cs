@@ -114,7 +114,7 @@
             this.buttonWipeAddDB.TabIndex = 2;
             this.buttonWipeAddDB.Text = "Ecrasement + Ajout";
             this.buttonWipeAddDB.UseVisualStyleBackColor = true;
-            this.buttonWipeAddDB.Click += new System.EventHandler(this.buttonWipeAddDB_Click);
+            this.buttonWipeAddDB.Click += new System.EventHandler(this.ButtonWipeAddDB_Click);
             // 
             // contextMenuStrip1
             // 

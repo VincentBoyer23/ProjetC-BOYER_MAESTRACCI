@@ -23,7 +23,7 @@ namespace Bacchus
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            addToBDD();
+            AddToBDD();
         }
         /// <summary>
         /// ouvre la fenêtre permettant de sélectionner un fichier csv à importer
@@ -63,16 +63,16 @@ namespace Bacchus
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonWipeAddDB_Click(object sender, EventArgs e)
+        private void ButtonWipeAddDB_Click(object sender, EventArgs e)
         {
-            textBoxLog.AppendText("c'est la purge, cachez-vous, "+MainController.PurgeBDD()+ " rows deleted\r\n\r\n");
+            textBoxLog.AppendText("Purge: "+MainController.PurgeBDD()+ " lignes supprimées.\r\n\r\n");
             MainController.MajRefs();
-            addToBDD();
+            AddToBDD();
         }
         /// <summary>
         /// Ajoute ls données contenues dans le fichier csv en base de donnée, elle remplit la textBoxLog et incrément la progress bar
         /// </summary>
-        private void addToBDD()
+        private void AddToBDD()
         {
             var fileName = textBoxFileName.Text;
             using (StreamReader sr = new StreamReader(fileName))
