@@ -111,7 +111,7 @@
             this.textBoxPrixHT.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPrixHT.Name = "textBoxPrixHT";
             this.textBoxPrixHT.Size = new System.Drawing.Size(91, 26);
-            this.textBoxPrixHT.TabIndex = 9;
+            this.textBoxPrixHT.TabIndex = 8;
             // 
             // textBoxQuantite
             // 
@@ -119,7 +119,7 @@
             this.textBoxQuantite.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxQuantite.Name = "textBoxQuantite";
             this.textBoxQuantite.Size = new System.Drawing.Size(91, 26);
-            this.textBoxQuantite.TabIndex = 8;
+            this.textBoxQuantite.TabIndex = 9;
             // 
             // labelQuantity
             // 
