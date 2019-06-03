@@ -383,25 +383,33 @@ namespace Bacchus
         /// </summary>
         private void DeleteItemFromList()
         {
-            string Ref = GetSelectedIdValue();
-            switch (CurrentType)
+
+            DialogResult dr = MessageBox.Show("Êtes-vous sur de vouloir supprimer cet élément?", "Suppression", MessageBoxButtons.OKCancel,
+   MessageBoxIcon.Information);
+
+            if (dr == DialogResult.OK)
             {
-                case ListTypes.Article:
-                    MainController.DeleteArticle(Ref);
-                    break;
-                case ListTypes.Famille:
-                    MainController.DeleteFamille(Int32.Parse(Ref));
-                    break;
-                case ListTypes.SousFamille:
-                    MainController.DeleteSousFamille(Int32.Parse(Ref));
-                    break;
-                case ListTypes.Marque:
-                    MainController.DeleteMarque(Int32.Parse(Ref));
-                    break;
-                default: break;
+                string Ref = GetSelectedIdValue();
+                switch (CurrentType)
+                {
+                    case ListTypes.Article:
+                        MainController.DeleteArticle(Ref);
+                        break;
+                    case ListTypes.Famille:
+                        MainController.DeleteFamille(Int32.Parse(Ref));
+                        break;
+                    case ListTypes.SousFamille:
+                        MainController.DeleteSousFamille(Int32.Parse(Ref));
+                        break;
+                    case ListTypes.Marque:
+                        MainController.DeleteMarque(Int32.Parse(Ref));
+                        break;
+                    default: break;
+                }
+                MajListViews();
+                UpdateStatus();
             }
-            MajListViews();
-            UpdateStatus();
+
         }
 
 
